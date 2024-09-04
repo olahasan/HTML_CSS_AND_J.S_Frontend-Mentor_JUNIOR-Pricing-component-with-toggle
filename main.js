@@ -1,67 +1,33 @@
-let button = document.getElementById("button");
-let num = document.querySelectorAll(".num");
-// console.log(button);
-// console.log(num);
+document
+  .querySelector(".container")
+  .addEventListener("click", function (event) {
+    if (event.target.classList.contains("learn")) {
+      document.querySelectorAll(".box").forEach(function (box) {
+        box.classList.remove("active");
+      });
+      event.target.parentElement.classList.add("active");
+    } else if (
+      event.target.id === "button" ||
+      event.target.closest("#button")
+    ) {
+      toggleButton();
+    }
+  });
 
-button.onclick = function(){
-        button.classList.toggle("left");
-if(button.classList.contains("left")){
-    // console.log("true");
-    num.forEach(function(e, index){
-        if(index === 0){
-            // console.log(e);
-            e.innerHTML ="$199.99";
-            
-        }else if (index === 1){
-            e.innerHTML = "$249.99";
-            // console.log(e);
-        }else{
-            e.innerHTML = "$399.99";
-            // console.log(e);
-        }        
-    })
-}else{
-    num.forEach(function(e, index){
-        if(index === 0){
-            // console.log(e);
-            e.innerHTML = "$19.99";
-        }else if (index === 1){
-            e.innerHTML = "$24.99";
-            // console.log(e);
-        }else{
-            e.innerHTML = "$39.99";
-            // console.log(e);
-        }        
-    })
+document.getElementById("button").addEventListener("keydown", function (event) {
+  if (event.key === "ArrowRight" || event.key === "ArrowLeft") {
+    event.preventDefault(); // Prevent default action for space key
+    toggleButton();
+  }
+});
+
+function toggleButton() {
+  const button = document.getElementById("button");
+  button.classList.toggle("left");
+  const prices = button.classList.contains("left")
+    ? ["$199.99", "$249.99", "$399.99"]
+    : ["$19.99", "$24.99", "$39.99"];
+  document.querySelectorAll(".num").forEach((e, index) => {
+    e.innerHTML = prices[index];
+  });
 }
-       
-    }
-
-
- 
-    
-let learn = document.querySelectorAll(".learn");
-// console.log(learn);
-
-let box = document.querySelectorAll(".box");
-// console.log(box);
-
-
-
-learn.forEach(function(e){
-    
-
-    e.onclick = function(){
-        
-        box.forEach(function(ele){
-            ele.classList.remove("active");
-        })
-        
-    // console.log(e.parentElement); 
-    e.parentElement.classList.add("active");  
-    }
-    
-})
-
-
-
